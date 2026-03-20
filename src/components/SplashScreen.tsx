@@ -40,7 +40,7 @@ export function SplashScreen({ onEnter }: SplashScreenProps): React.JSX.Element 
       }}
     >
       <img
-        src="/eec-logo.svg"
+        src={`${import.meta.env.BASE_URL}eec-logo.svg`}
         alt="Energy and Environment Cabinet"
         style={{ height: "80px", marginBottom: "24px" }}
       />

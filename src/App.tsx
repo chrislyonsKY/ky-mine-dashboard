@@ -497,7 +497,7 @@ export function App(): React.JSX.Element {
       {/* ---- Header ---- */}
       <calcite-navigation slot="header" role="banner">
         <div slot="logo" className="header-logo-group">
-          <img src="/eec-logo.svg" alt="Energy and Environment Cabinet logo" />
+          <img src={`${import.meta.env.BASE_URL}eec-logo.svg`} alt="Energy and Environment Cabinet logo" />
           <div className="header-title">
             <h1>Kentucky Mine Permits Dashboard</h1>
             <span aria-live="polite" aria-atomic="true">
