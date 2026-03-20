@@ -79,6 +79,7 @@ export function App(): React.JSX.Element {
   const imageryLayerRef = useRef<ImageryLayer | null>(null);
   const minesFeatureLayerRef = useRef<FeatureLayer | null>(null);
   const highlightLayerRef = useRef<GraphicsLayer | null>(null);
+  const clickHandlerRef = useRef<(view: MapView, pt: { x: number; y: number }) => void>(() => {});
   const [tableLayer, setTableLayer] = useState<FeatureLayer | null>(null);
 
   const viewState = useDashboardStore((s) => s.viewState);
@@ -259,8 +260,11 @@ export function App(): React.JSX.Element {
         console.error("County click failed:", err);
       }
     },
-    [selectCounty, definitionExpression],
+    [selectCounty, definitionExpression, handleMineIdentify],
   );
+
+  // Keep click handler ref current
+  clickHandlerRef.current = handleCountyClick;
 
   /** Map ready */
   const handleViewReady = useCallback(
@@ -331,10 +335,10 @@ export function App(): React.JSX.Element {
       countiesLayer.when(() => detectCoalCounties(view, countiesLayer));
 
       view.on("click", (evt: { x: number; y: number }) => {
-        handleCountyClick(view, { x: evt.x, y: evt.y });
+        clickHandlerRef.current(view, { x: evt.x, y: evt.y });
       });
     },
-    [definitionExpression, handleCountyClick, detectCoalCounties],
+    [detectCoalCounties],
   );
 
   /** Back to state view */
@@ -453,9 +457,9 @@ export function App(): React.JSX.Element {
             const graphic = new Graphic({
               geometry: polygon,
               symbol: new SimpleFillSymbol({
-                color: new Color([255, 255, 0, 0.3]),
+                color: new Color([0, 200, 255, 0.25]),
                 outline: new SimpleLineSymbol({
-                  color: new Color([255, 200, 0, 1]),
+                  color: new Color([0, 200, 255, 1]),
                   width: 3,
                 }),
               }),
