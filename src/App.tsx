@@ -543,12 +543,11 @@ export function App(): React.JSX.Element {
       </calcite-navigation>
 
       {/* ---- KPI Indicator Strip ---- */}
-      {splashDismissed && (
-        <div slot="header" role="region" aria-label="Mine count summary">
-          <ErrorBoundary><KpiCards /></ErrorBoundary>
-          <ActiveFilters />
-        </div>
-      )}
+      <div slot="header" role="region" aria-label="Mine count summary"
+        style={{ visibility: splashDismissed ? "visible" : "hidden" }}>
+        <ErrorBoundary><KpiCards /></ErrorBoundary>
+        <ActiveFilters />
+      </div>
 
       {/* ---- Map ---- */}
       <arcgis-map
@@ -572,21 +571,20 @@ export function App(): React.JSX.Element {
       </arcgis-map>
 
       {/* ---- Right Sidebar ---- */}
-      {splashDismissed && (
-        <calcite-shell-panel slot="panel-end" position="end" width-scale="m" role="region" aria-label="Analytics panel">
-          <calcite-panel heading="Analytics">
-            <calcite-block heading="Key Insights" expanded>
-              <ErrorBoundary><KeyInsights /></ErrorBoundary>
-            </calcite-block>
-            <calcite-block heading="Status Breakdown" expanded>
-              <ErrorBoundary><MineStatuChart /></ErrorBoundary>
-            </calcite-block>
-            <calcite-block heading="Surface vs Underground" expanded>
-              <ErrorBoundary><SurfaceVsUnderground /></ErrorBoundary>
-            </calcite-block>
-          </calcite-panel>
-        </calcite-shell-panel>
-      )}
+      <calcite-shell-panel slot="panel-end" position="end" width-scale="m" role="region" aria-label="Analytics panel"
+        style={{ visibility: splashDismissed ? "visible" : "hidden" }}>
+        <calcite-panel heading="Analytics">
+          <calcite-block heading="Key Insights" expanded>
+            <ErrorBoundary><KeyInsights /></ErrorBoundary>
+          </calcite-block>
+          <calcite-block heading="Status Breakdown" expanded>
+            <ErrorBoundary><MineStatuChart /></ErrorBoundary>
+          </calcite-block>
+          <calcite-block heading="Surface vs Underground" expanded>
+            <ErrorBoundary><SurfaceVsUnderground /></ErrorBoundary>
+          </calcite-block>
+        </calcite-panel>
+      </calcite-shell-panel>
 
       {/* ---- Feature Table (county view) ---- */}
       {showTable && tableLayer && (
