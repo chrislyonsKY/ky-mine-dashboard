@@ -33,6 +33,7 @@ interface DashboardState {
   clearCounty: () => void;
   setTypeFlag: (flag: string | null) => void;
   setFeatCLS: (cls: string | null) => void;
+  setTypeFlagAndFeatCLS: (flag: string | null, cls: string | null) => void;
   setMineStatuGroup: (group: MineStatuGroup | null) => void;
   selectMine: (mine: MineFeature) => void;
   clearMine: () => void;
@@ -90,6 +91,19 @@ export const useDashboardStore = create<DashboardState>((set) => ({
       const next = { ...state, featCLS: state.featCLS === cls ? null : cls };
       return {
         featCLS: next.featCLS,
+        definitionExpression: computeExpression(next),
+      };
+    }),
+
+  setTypeFlagAndFeatCLS: (flag, cls) =>
+    set((state) => {
+      const sameCard = state.typeFlag === flag && state.featCLS === cls;
+      const nextTypeFlag = sameCard ? null : flag;
+      const nextFeatCLS = sameCard ? null : cls;
+      const next = { ...state, typeFlag: nextTypeFlag, featCLS: nextFeatCLS };
+      return {
+        typeFlag: nextTypeFlag,
+        featCLS: nextFeatCLS,
         definitionExpression: computeExpression(next),
       };
     }),

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import {
   BarChart,
   Bar,
@@ -18,7 +18,7 @@ interface ChartDatum {
   color: string;
 }
 
-async function fetchStatuStats(where: string): Promise<ChartDatum[]> {
+async function fetchStatuStats(where: string, signal?: AbortSignal): Promise<ChartDatum[]> {
   const params = new URLSearchParams({
     where,
     outStatistics: JSON.stringify([
@@ -28,7 +28,8 @@ async function fetchStatuStats(where: string): Promise<ChartDatum[]> {
     f: "json",
   });
 
-  const res = await fetch(`${MINE_BOUNDARIES_URL}/query?${params}`);
+  const res = await fetch(`${MINE_BOUNDARIES_URL}/query?${params}`, { signal });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = (await res.json()) as {
     features: Array<{ attributes: { MINE_STATU: string | null; cnt: number } }>;
   };
@@ -51,12 +52,55 @@ async function fetchStatuStats(where: string): Promise<ChartDatum[]> {
 
 export function MineStatuChart(): React.JSX.Element {
   const [chartData, setChartData] = useState<ChartDatum[]>([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
   const definitionExpression = useDashboardStore((s) => s.definitionExpression);
   const setMineStatuGroup = useDashboardStore((s) => s.setMineStatuGroup);
+  const abortRef = useRef<AbortController | null>(null);
 
-  useEffect(() => {
-    fetchStatuStats(definitionExpression).then(setChartData).catch(console.error);
+  const load = useCallback(() => {
+    abortRef.current?.abort();
+    const ctrl = new AbortController();
+    abortRef.current = ctrl;
+    setError(false);
+    setLoading(true);
+
+    fetchStatuStats(definitionExpression, ctrl.signal)
+      .then((data) => {
+        if (!ctrl.signal.aborted) {
+          setChartData(data);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        console.error("MINE_STATU fetch failed:", err);
+        if (!ctrl.signal.aborted) {
+          setError(true);
+          setLoading(false);
+        }
+      });
+
+    return () => ctrl.abort();
   }, [definitionExpression]);
+
+  useEffect(() => load(), [load]);
+
+  if (error) {
+    return (
+      <p style={{ padding: "8px", fontSize: "12px", color: "var(--calcite-color-status-danger)" }}>
+        Failed to load chart.{" "}
+        <span onClick={load} role="button" tabIndex={0} style={{ cursor: "pointer", textDecoration: "underline" }}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") load(); }}>
+          Retry
+        </span>
+      </p>
+    );
+  }
+
+  if (loading) {
+    return <p style={{ padding: "8px", fontSize: "12px" }}>Loading...</p>;
+  }
 
   return (
     <div className="chart-container" role="img" aria-label="Bar chart of mine status distribution">

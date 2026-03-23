@@ -56,12 +56,12 @@ import { SplashScreen } from "./components/SplashScreen.js";
 import { AboutModal } from "./components/AboutModal.js";
 import { useUrlState } from "./hooks/useUrlState.js";
 
-/** Kentucky statewide extent (Web Mercator) */
+/** Kentucky statewide extent (Web Mercator) — tighter fit */
 const KY_EXTENT = new Extent({
-  xmin: -10000000,
-  ymin: 4430000,
-  xmax: -9310000,
-  ymax: 4740000,
+  xmin: -9972000,
+  ymin: 4470000,
+  xmax: -9120000,
+  ymax: 4720000,
   spatialReference: { wkid: 3857 },
 });
 
@@ -543,10 +543,12 @@ export function App(): React.JSX.Element {
       </calcite-navigation>
 
       {/* ---- KPI Indicator Strip ---- */}
-      <div slot="header" role="region" aria-label="Mine count summary">
-        <ErrorBoundary><KpiCards /></ErrorBoundary>
-        <ActiveFilters />
-      </div>
+      {splashDismissed && (
+        <div slot="header" role="region" aria-label="Mine count summary">
+          <ErrorBoundary><KpiCards /></ErrorBoundary>
+          <ActiveFilters />
+        </div>
+      )}
 
       {/* ---- Map ---- */}
       <arcgis-map
@@ -570,19 +572,21 @@ export function App(): React.JSX.Element {
       </arcgis-map>
 
       {/* ---- Right Sidebar ---- */}
-      <calcite-shell-panel slot="panel-end" position="end" width-scale="m" role="region" aria-label="Analytics panel">
-        <calcite-panel heading="Analytics">
-          <calcite-block heading="Key Insights" expanded>
-            <ErrorBoundary><KeyInsights /></ErrorBoundary>
-          </calcite-block>
-          <calcite-block heading="Status Breakdown" expanded>
-            <ErrorBoundary><MineStatuChart /></ErrorBoundary>
-          </calcite-block>
-          <calcite-block heading="Surface vs Underground" expanded>
-            <ErrorBoundary><SurfaceVsUnderground /></ErrorBoundary>
-          </calcite-block>
-        </calcite-panel>
-      </calcite-shell-panel>
+      {splashDismissed && (
+        <calcite-shell-panel slot="panel-end" position="end" width-scale="m" role="region" aria-label="Analytics panel">
+          <calcite-panel heading="Analytics">
+            <calcite-block heading="Key Insights" expanded>
+              <ErrorBoundary><KeyInsights /></ErrorBoundary>
+            </calcite-block>
+            <calcite-block heading="Status Breakdown" expanded>
+              <ErrorBoundary><MineStatuChart /></ErrorBoundary>
+            </calcite-block>
+            <calcite-block heading="Surface vs Underground" expanded>
+              <ErrorBoundary><SurfaceVsUnderground /></ErrorBoundary>
+            </calcite-block>
+          </calcite-panel>
+        </calcite-shell-panel>
+      )}
 
       {/* ---- Feature Table (county view) ---- */}
       {showTable && tableLayer && (
