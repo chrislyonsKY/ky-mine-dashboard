@@ -1,0 +1,24 @@
+{
+  "name": "mine-permit-search",
+  "label": "Mine Permit Search",
+  "type": "widget",
+  "version": "1.19.0",
+  "exbVersion": "1.19.0",
+  "author": "KY EEC",
+  "description": "Autocomplete permit number search with 300ms debounce. Select a result to zoom and cross-filter.",
+  "copyright": "Copyright 2026 KY EEC",
+  "license": "GPL-3.0",
+  "properties": {
+    "canCreateMapView": false,
+    "hasVersionManager": false,
+    "hasSettingPage": true
+  },
+  "publishMessages": [
+    "DATA_RECORD_SET_CHANGE"
+  ],
+  "translatedLocales": ["en"],
+  "defaultSize": {
+    "width": 280,
+    "height": 40
+  }
+}

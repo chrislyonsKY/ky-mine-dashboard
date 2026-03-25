@@ -1,0 +1,6 @@
+{
+  "name": "mine-statu-chart",
+  "dependencies": {
+    "recharts": "^2.15.0"
+  }
+}

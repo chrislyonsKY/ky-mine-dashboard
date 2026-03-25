@@ -1,0 +1,21 @@
+{
+  "name": "mine-time-series",
+  "label": "Mine Acreage Chart",
+  "type": "widget",
+  "version": "1.19.0",
+  "exbVersion": "1.19.0",
+  "author": "KY EEC",
+  "description": "Horizontal bar chart of total permitted acreage by Type_Flag status (Active, Inactive, Historic).",
+  "copyright": "Copyright 2026 KY EEC",
+  "license": "GPL-3.0",
+  "properties": {
+    "canCreateMapView": false,
+    "hasVersionManager": false,
+    "hasSettingPage": true
+  },
+  "translatedLocales": ["en"],
+  "defaultSize": {
+    "width": 320,
+    "height": 240
+  }
+}

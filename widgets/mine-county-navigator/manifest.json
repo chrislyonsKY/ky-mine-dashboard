@@ -1,0 +1,23 @@
+{
+  "name": "mine-county-navigator",
+  "label": "Mine County Navigator",
+  "type": "widget",
+  "version": "1.19.0",
+  "exbVersion": "1.19.0",
+  "author": "KY EEC",
+  "description": "County-first navigation. Click a county on the map to scope all widgets to that county via spatial filter.",
+  "copyright": "Copyright 2026 KY EEC",
+  "license": "GPL-3.0",
+  "properties": {
+    "canCreateMapView": true,
+    "hasVersionManager": false
+  },
+  "publishMessages": [
+    "EXTENT_CHANGE"
+  ],
+  "translatedLocales": ["en"],
+  "defaultSize": {
+    "width": 200,
+    "height": 40
+  }
+}

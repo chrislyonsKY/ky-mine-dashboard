@@ -1,0 +1,24 @@
+{
+  "name": "mine-kpi-cards",
+  "label": "Mine KPI Cards",
+  "type": "widget",
+  "version": "1.19.0",
+  "exbVersion": "1.19.0",
+  "author": "KY EEC",
+  "description": "Six KPI indicator cards showing mine counts by Type_Flag and FeatCLS, plus a total. Click a card to cross-filter.",
+  "copyright": "Copyright 2026 KY EEC",
+  "license": "GPL-3.0",
+  "properties": {
+    "canCreateMapView": false,
+    "hasVersionManager": false,
+    "hasSettingPage": true
+  },
+  "publishMessages": [
+    "DATA_RECORD_SET_CHANGE"
+  ],
+  "translatedLocales": ["en"],
+  "defaultSize": {
+    "width": 800,
+    "height": 80
+  }
+}

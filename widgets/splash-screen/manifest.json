@@ -1,0 +1,20 @@
+{
+  "name": "splash-screen",
+  "label": "Splash Screen",
+  "type": "widget",
+  "version": "1.19.0",
+  "exbVersion": "1.19.0",
+  "author": "KY EEC",
+  "description": "Animated splash screen with EEC logo that fades out on load.",
+  "copyright": "Copyright 2026 KY EEC",
+  "license": "GPL-3.0",
+  "properties": {
+    "canCreateMapView": false,
+    "hasVersionManager": false
+  },
+  "translatedLocales": ["en"],
+  "defaultSize": {
+    "width": 1280,
+    "height": 800
+  }
+}

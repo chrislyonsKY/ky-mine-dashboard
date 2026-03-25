@@ -1,0 +1,24 @@
+{
+  "name": "mine-region-breakdown",
+  "label": "Mine Region Breakdown",
+  "type": "widget",
+  "version": "1.19.0",
+  "exbVersion": "1.19.0",
+  "author": "KY EEC",
+  "description": "List of DMP regional offices with permit counts. Click a region to cross-filter.",
+  "copyright": "Copyright 2026 KY EEC",
+  "license": "GPL-3.0",
+  "properties": {
+    "canCreateMapView": false,
+    "hasVersionManager": false,
+    "hasSettingPage": true
+  },
+  "publishMessages": [
+    "DATA_RECORD_SET_CHANGE"
+  ],
+  "translatedLocales": ["en"],
+  "defaultSize": {
+    "width": 320,
+    "height": 200
+  }
+}

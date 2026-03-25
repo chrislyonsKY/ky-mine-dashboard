@@ -1,0 +1,70 @@
+/* ---- Region Breakdown ---- */
+.widget-mine-region-breakdown {
+  height: 100%;
+  overflow: auto;
+}
+
+.region-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--calcite-color-border-3);
+  background: var(--calcite-color-foreground-1);
+  transition: background 0.15s;
+  font-size: 13px;
+}
+
+.region-row:hover {
+  background: var(--calcite-color-foreground-2);
+}
+
+.region-row:focus-visible {
+  outline: 2px solid var(--calcite-color-brand);
+  outline-offset: -2px;
+}
+
+.region-row--selected {
+  background: var(--calcite-color-foreground-3);
+  border-left: 3px solid var(--calcite-color-brand);
+}
+
+.region-row__name {
+  color: var(--calcite-color-text-1);
+  font-weight: 500;
+}
+
+.region-row__count {
+  color: var(--calcite-color-text-2);
+  font-size: 12px;
+}
+
+/* Retry button */
+.retry-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+}
+
+.retry-btn:focus-visible {
+  outline: 2px solid var(--calcite-color-brand);
+  outline-offset: 2px;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

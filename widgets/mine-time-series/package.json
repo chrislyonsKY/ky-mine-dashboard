@@ -1,0 +1,6 @@
+{
+  "name": "mine-time-series",
+  "dependencies": {
+    "recharts": "^2.15.0"
+  }
+}
